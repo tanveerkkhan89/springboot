@@ -4,6 +4,10 @@ metadata:
   name: {{ include "my-app.fullname" . }}
   labels:
     {{- include "my-app.labels" . | nindent 4 }}
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
 spec:
   type: {{ .Values.service.type }}
   ports:

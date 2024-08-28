@@ -59,7 +59,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: eks-tanveer_cluster
+        working-directory: ekscluster
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -67,7 +67,7 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -lock=false -auto-approve
-        working-directory: eks-tanveer_cluster
+        working-directory: ekscluster
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -88,7 +88,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: eks-tanveer_cluster
+        working-directory: ekscluster
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -101,7 +101,7 @@ jobs:
           CLUSTER_NAME=$(terraform output -raw eks_cluster_name | tr -d '\r' | tr -d '\n')
           echo "CLUSTER_NAME=${CLUSTER_NAME}"
           echo "::set-output name=cluster_name::${CLUSTER_NAME}"
-        working-directory: eks-tanveer_cluster
+        working-directory: ekscluster
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -121,10 +121,10 @@ jobs:
         run: ls -alh
 
       - name: List contents of my-spring-app directory
-        run: ls -alh ./my-spring-app
+        run: ls -alh ./my-app
 
       - name: Change Directory
-        run: cd ./my-spring-app
+        run: cd ./my-app
 
       - name: Install kubectl
         run: |
@@ -151,7 +151,7 @@ jobs:
       - name: Deploy with Helm
         run: |
           helm upgrade --install my-release . --set image.tag=${{ github.sha }}
-        working-directory: ./my-spring-app
+        working-directory: ./my-app
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -172,7 +172,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: eks-tanveer_cluster
+        working-directory: ekscluster
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -180,7 +180,7 @@ jobs:
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
-        working-directory: eks-tanveer_cluster
+        working-directory: ekscluster
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

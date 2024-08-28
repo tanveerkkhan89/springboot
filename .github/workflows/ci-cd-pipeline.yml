@@ -8,7 +8,7 @@ on:
     inputs:
       destroy_cluster:
         description: 'Set to true to destroy the cluster'
-        required: false
+        required: true
         default: 'false'
         type: boolean
 

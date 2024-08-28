@@ -73,13 +73,29 @@ resources: {}
   #   memory: 128Mi
 
 livenessProbe:
-  httpGet:
-    path: /
-    port: http
+  exec:
+    command:
+      - sh
+      - -c
+      - curl -f http://localhost:8080/ || exit 1
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+  successThreshold: 1
+
 readinessProbe:
-  httpGet:
-    path: /
-    port: http
+  exec:
+    command:
+      - sh
+      - -c
+      - curl -f http://localhost:8080/ || exit 1
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+  successThreshold: 1
+
 
 autoscaling:
   enabled: false

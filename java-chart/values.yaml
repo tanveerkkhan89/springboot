@@ -1,14 +1,14 @@
-# Default values for my-app.
+# Default values for java-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-#docker pull khatanve/my-image:e60079b6f18332ed4451022e881f127dd2adf94b
+
 replicaCount: 1
 
 image:
   repository: khatanve/my-image
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "e60079b6f18332ed4451022e881f127dd2adf94b"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -17,8 +17,6 @@ fullnameOverride: ""
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -26,7 +24,6 @@ serviceAccount:
   name: ""
 
 podAnnotations: {}
-podLabels: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -41,8 +38,10 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 8080
+  port: 80
   targetPort: 8080
+  protocol: TCP
+  name: java-chart
 
 ingress:
   enabled: false
@@ -72,50 +71,12 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-livenessProbe:
-  exec:
-    command:
-      - sh
-      - -c
-      - curl -f http://localhost:8080/ || exit 1
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-  failureThreshold: 3
-  successThreshold: 1
-
-readinessProbe:
-  exec:
-    command:
-      - sh
-      - -c
-      - curl -f http://localhost:8080/ || exit 1
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-  failureThreshold: 3
-  successThreshold: 1
-
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
-
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
-
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
 
 nodeSelector: {}
 

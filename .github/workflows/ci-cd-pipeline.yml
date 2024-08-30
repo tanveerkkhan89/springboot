@@ -8,7 +8,7 @@ on:
     inputs:
       destroy_cluster:
         description: 'Set to true to destroy the cluster'
-        required: true
+        required: false
         default: 'false'
         type: boolean
 
@@ -114,17 +114,17 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Print current working directory
-        run: pwd
+      # - name: Print current working directory
+      #   run: pwd
 
-      - name: List contents of repository
-        run: ls -alh
+      # - name: List contents of repository
+      #   run: ls -alh
 
-      - name: List contents of my-spring-app directory
-        run: ls -alh ./my-app
+      # - name: List contents of my-spring-app directory
+      #   run: ls -alh ./my-app
 
       - name: Change Directory
-        run: cd ./my-app
+        run: cd ./java-chart
 
       - name: Install kubectl
         run: |
@@ -151,7 +151,7 @@ jobs:
       - name: Deploy with Helm
         run: |
           helm upgrade --install my-release . --set image.tag=${{ github.sha }}
-        working-directory: ./my-app
+        working-directory: ./java-chart
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

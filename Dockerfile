@@ -1,15 +1,31 @@
-#pull base image
-FROM openjdk:8-jdk-alpine
+# syntax=docker/dockerfile:1
 
-#maintainer 
-MAINTAINER hkdemircan06@gmail.com
+#
+# Build image
+#
+FROM eclipse-temurin:19-jdk-jammy AS build
 
+WORKDIR /app
 
-ARG PACKAGED_JAR=target/hello-0.0.1-SNAPSHOT.jar
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
 
-ADD ${PACKAGED_JAR} app.jar
+COPY src ./src
 
-ENTRYPOINT ["java","-jar","-Xdebug","-Xrunjdwp:server=y,transport=dt_socket,address=8001,suspend=n","/app.jar"]
+RUN ./mvnw clean package
 
-EXPOSE 8080:8080
-EXPOSE 8001:8001
+#
+# Image
+#
+FROM eclipse-temurin:19-jre
+COPY --from=build /app/target/*.jar /app.jar
+
+ENV JAVA_OPTS=""
+
+EXPOSE ${SERVER_PORT}
+
+HEALTHCHECK --interval=10s --timeout=3s \
+CMD curl -v --fail http://localhost:${SERVER_PORT} || exit 1
+
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar /app.jar" ]

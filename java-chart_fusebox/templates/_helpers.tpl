@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "springboot-demoweb.name" -}}
+{{- define "java-chart.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "springboot-demoweb.fullname" -}}
+{{- define "java-chart.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "springboot-demoweb.chart" -}}
+{{- define "java-chart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "springboot-demoweb.labels" -}}
-helm.sh/chart: {{ include "springboot-demoweb.chart" . }}
-{{ include "springboot-demoweb.selectorLabels" . }}
+{{- define "java-chart.labels" -}}
+helm.sh/chart: {{ include "java-chart.chart" . }}
+{{ include "java-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "springboot-demoweb.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "springboot-demoweb.name" . }}
+{{- define "java-chart.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "java-chart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "springboot-demoweb.serviceAccountName" -}}
+{{- define "java-chart.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "springboot-demoweb.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "java-chart.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

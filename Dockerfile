@@ -20,13 +20,18 @@ RUN ./mvnw clean package
 
 # Runtime image
 FROM eclipse-temurin:19-jre
+
+# Copy the JAR file from the build stage
 COPY --from=build /app/target/*.jar /app.jar
 
-ENV JAVA_OPTS=""
+# Set the port on which the application will run
+ENV SERVER_PORT=8080
 
 EXPOSE ${SERVER_PORT}
 
+# Health check command
 HEALTHCHECK --interval=10s --timeout=3s \
   CMD curl -v --fail http://localhost:${SERVER_PORT} || exit 1
 
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar /app.jar" ]
+# Run the application
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app.jar"]

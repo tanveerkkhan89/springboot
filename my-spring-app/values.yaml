@@ -18,10 +18,14 @@ service:
 ingress:
   enabled: true
   name: ""
-  annotations: {}
-  host: my-app.example.com  # Replace with your domain or IP
   path: /
-  tls: []  # Add TLS configurations if needed
+  hosts:
+    - host: my-app.example.com
+      paths:
+        - /
+  tls: []
+  annotations: {}
+
 
 autoscaling:
   enabled: false

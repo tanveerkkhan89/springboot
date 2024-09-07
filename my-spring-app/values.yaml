@@ -3,7 +3,13 @@ replicaCount: 1
 image:
   repository: khatanve/my-spring-app
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "latest"  # Make sure to replace this with your actual image tag
+
+serviceAccount:
+  create: true
+  name: ""  # Leave empty to use default name, or provide a custom name
+  annotations: {}  # Add any annotations you need, or leave as an empty dictionary
+  automount: true  # Set to false if you do not want to automount the service account token
 
 service:
   type: LoadBalancer

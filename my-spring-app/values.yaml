@@ -17,15 +17,18 @@ service:
 
 ingress:
   enabled: true
-  name: ""
-  path: /
+  className: ""  # Optional: specify if using a specific ingress class
+  name: ""  # Optional: specify a custom name for the Ingress resource
+  annotations: {}  # Add any annotations needed
+  tls:
+    - hosts:
+        - my-app.example.com
+      secretName: my-tls-secret  # Replace with your actual TLS secret name
   hosts:
     - host: my-app.example.com
       paths:
-        - /
-  tls: []
-  annotations: {}
-
+        - path: /
+          pathType: Prefix
 
 autoscaling:
   enabled: false

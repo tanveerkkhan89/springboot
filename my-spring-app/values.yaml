@@ -37,20 +37,12 @@ securityContext: {}
   #   - ALL
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
-  # runAsUser: 1000
-
-#service:
-#  type: LoadBalancer
-#  port: 80
-#  targetPort: 8080
-  
-  
+  # runAsUser: 1000  
  service:
   type: NodePort
   port: 80
   targetPort: 8080
   nodePort: 30000 # or any available port in the range 30000-32767
-
 
 ingress:
   enabled: false

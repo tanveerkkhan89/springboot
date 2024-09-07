@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: khatanve/my-image
+  repository: khatanve/my-spring-app
   pullPolicy: IfNotPresent
-  tag: ""  # Make sure to replace this with your actual image tag
+  tag: ""  # Replace this with your actual image tag
 
 serviceAccount:
   create: true
@@ -16,14 +16,18 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  
+  enabled: true
+  name: ""
+  annotations: {}
+  host: my-app.example.com  # Replace with your domain or IP
+  path: /
+  tls: []  # Add TLS configurations if needed
+
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 resources: {}
 

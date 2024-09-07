@@ -1,5 +1,3 @@
-#main.tf wihtout Loadblancer 
-
 terraform {
   backend "s3" {
     bucket         = "rakbankdemo3"
@@ -34,6 +32,7 @@ resource "aws_subnet" "public" {
 
   tags = {
     Name = "public-subnet-${count.index + 1}"
+    "kubernetes.io/role/elb" = "1" # Tag for LoadBalancer
   }
 }
 

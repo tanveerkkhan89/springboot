@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the jar file
-COPY target/my-spring-app.jar /app/my-spring-app.jar
+COPY target/demo-0.0.1-SNAPSHOT.jar /app/my-spring-app.jar
 
 # Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "/app/my-spring-app.jar"]

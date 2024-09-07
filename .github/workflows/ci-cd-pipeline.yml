@@ -127,7 +127,7 @@ jobs:
       #   run: ls -alh ./my-app
 
       - name: Change Directory
-        run: cd ./java-chart
+        run: cd ./my-spring-app
 
       - name: Install kubectl
         run: |
@@ -154,7 +154,7 @@ jobs:
       - name: Deploy with Helm
         run: |
           helm upgrade --install my-release . --set image.tag=${{ github.sha }}
-        working-directory: ./java-chart
+        working-directory: ./my-spring-app
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -38,7 +38,8 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000  
- service:
+
+service:
   type: NodePort
   port: 80
   targetPort: 8080
@@ -67,7 +68,6 @@ resources:
   requests:
     memory: "256Mi"
     cpu: "250m"
-
 
 livenessProbe:
   httpGet:

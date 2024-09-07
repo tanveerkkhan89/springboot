@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: khatanve/my-spring-app
+  repository: khatanve/my-image
   pullPolicy: IfNotPresent
   tag: ""  # Replace this with your actual image tag
 

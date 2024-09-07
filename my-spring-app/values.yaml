@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: khatanve/my-spring-app
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: ""
 
 service:
   type: LoadBalancer

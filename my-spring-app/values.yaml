@@ -10,13 +10,20 @@ serviceAccount:
   name: ""  # Leave empty to use default name, or provide a custom name
   annotations: {}  # Add any annotations you need, or leave as an empty dictionary
   automount: true  # Set to false if you do not want to automount the service account token
- 
+
 service:
   type: LoadBalancer
   port: 80
 
 ingress:
   enabled: false
+  
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 resources: {}
 

@@ -3,13 +3,12 @@ kind: Service
 metadata:
   name: {{ include "my-spring-app.fullname" . }}
   labels:
-    {{- include "my-spring-app.labels" . | nindent 4 }}
+    app: {{ include "my-spring-app.name" . }}
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
   selector:
-    {{- include "my-spring-app.selectorLabels" . | nindent 4 }}
+    app: {{ include "my-spring-app.name" . }}

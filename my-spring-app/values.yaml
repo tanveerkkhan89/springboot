@@ -1,45 +1,16 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: khatanve/my-image
+  tag: ""
   pullPolicy: IfNotPresent
-  tag: ""  # Replace this with your actual image tag
-
-serviceAccount:
-  create: true
-  name: ""  # Leave empty to use default name, or provide a custom name
-  annotations: {}  # Add any annotations you need, or leave as an empty dictionary
-  automount: true  # Set to false if you do not want to automount the service account token
 
 service:
   type: LoadBalancer
   port: 80
+  targetPort: 8080
 
-ingress:
-  enabled: true
-  className: ""  # Optional: specify if using a specific ingress class
-  name: ""  # Optional: specify a custom name for the Ingress resource
-  annotations: {}  # Add any annotations needed
-  tls:
-    - hosts:
-        - my-app.example.com
-      secretName: my-tls-secret  # Replace with your actual TLS secret name
-  hosts:
-    - host: my-app.example.com
-      paths:
-        - path: /
-          pathType: Prefix
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
+imagePullSecrets:
+  - name: my-docker-registry-secret
 
 resources: {}
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}

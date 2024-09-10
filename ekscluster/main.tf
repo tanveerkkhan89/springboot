@@ -235,12 +235,6 @@ resource "aws_iam_role" "alb_ingress_role" {
   }
 }
 
-# IAM Policy for AWS Load Balancer Controller
-resource "aws_iam_policy" "alb_ingress_policy" {
-  name        = "alb-ingress-policy"
-  description = "Policy for AWS Load Balancer Controller"
-}
-
 resource "aws_iam_policy" "alb_ingress_policy" {
   name        = "ALBIngressPolicy"
   description = "Policy for ALB Ingress Controller"

@@ -216,17 +216,17 @@ resource "aws_iam_role" "alb_ingress_role" {
   name = "ALBIngressIAMRole"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2012-10-17",
     Statement = [
       {
         Effect = "Allow",
         Principal = {
-          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/oidc.eks.${aws_eks_cluster.eks_cluster.region}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}"
+          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/oidc.eks.${data.aws_region.current.name}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}"
         },
         Action = "sts:AssumeRoleWithWebIdentity",
         Condition = {
           StringEquals = {
-            "oidc.eks.${aws_eks_cluster.eks_cluster.region}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
+            "oidc.eks.${data.aws_region.current.name}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
           }
         }
       }
@@ -237,6 +237,7 @@ resource "aws_iam_role" "alb_ingress_role" {
     Name = "alb-ingress-role"
   }
 }
+
 
 resource "aws_iam_policy" "alb_ingress_policy" {
   name        = "ALBIngressPolicy"

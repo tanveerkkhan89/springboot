@@ -81,6 +81,7 @@ jobs:
     needs: deploy
     outputs:
       cluster_name: ${{ steps.terraform-output.outputs.cluster_name }}
+      vpc_id: ${{ steps.terraform-output.outputs.vpc_id }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -100,10 +101,12 @@ jobs:
       - name: Terraform Output
         id: terraform-output
         run: |
-          echo "Cluster Name Output:"
           CLUSTER_NAME=$(terraform output -raw eks_cluster_name | tr -d '\r' | tr -d '\n')
+          VPC_ID=$(terraform output -raw vpc_id | tr -d '\r' | tr -d '\n')
           echo "CLUSTER_NAME=${CLUSTER_NAME}"
+          echo "VPC_ID=${VPC_ID}"
           echo "::set-output name=cluster_name::${CLUSTER_NAME}"
+          echo "::set-output name=vpc_id::${VPC_ID}"
         working-directory: ekscluster
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -116,15 +119,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
-
-      # - name: Print current working directory
-      #   run: pwd
-
-      # - name: List contents of repository
-      #   run: ls -alh
-
-      # - name: List contents of my-spring-app directory
-      #   run: ls -alh ./my-app
 
       - name: Change Directory
         run: cd ./my-spring-app
@@ -150,6 +144,16 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-2
+
+      - name: Deploy AWS Load Balancer Controller
+        run: |
+          helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
+            --set clusterName=${{ needs.extract.outputs.cluster_name }} \
+            --set serviceAccount.create=false \
+            --set serviceAccount.name=my-custom-sa \
+            --set region=us-east-2 \
+            --set vpcId=${{ needs.extract.outputs.vpc_id }} \
+            --namespace kube-system
 
       - name: Deploy with Helm
         run: |

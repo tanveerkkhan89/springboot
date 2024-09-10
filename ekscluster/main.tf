@@ -310,3 +310,8 @@ resource "aws_iam_role_policy_attachment" "alb_ingress_role_policy" {
   role       = aws_iam_role.alb_ingress_role.name
   policy_arn = aws_iam_policy.alb_ingress_policy.arn
 }
+
+## Output the EKS Cluster Name
+output "eks_cluster_name" {
+  value = aws_eks_cluster.eks_cluster.name
+}

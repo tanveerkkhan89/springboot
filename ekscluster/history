@@ -1,0 +1,500 @@
+  Id CommandLine
+  -- -----------
+   1 cd C:\Users\khantan\Desktop\Testing\important
+   2 #mvn spring-boot:run
+   3 mvn clean
+   4 mvn clean install
+   5 mvn spring-boot:run
+   6 aws eks --region us-east-2 update-kubeconfig --name example-eks-cluster
+   7 kubectl get nodes
+   8 kubectl get all
+   9 kubectl get all
+  10 kubectl describe pod/my-release-my-spring-app-c8bb7776-pcqz2
+  11 kubectl get pods
+  12 kubectl exec -it <pod-name> -- netstat -tuln
+  13 kubectl exec -it my-release-my-spring-app-c8bb7776-pcqz2 -- netstat -tuln
+  14 kubect get all
+  15 kubectl get all
+  16 kubectl exec -it my-release-my-spring-app-c8bb7776-pcqz2 -- netstat -tuln
+  17 kubectl exec -it my-release-my-spring-app-c8bb7776-pcqz2 -- curl -v http://localhost:8080/actuator/health
+  18 kubectl describe PS C:\Users\khantan\Desktop\Testing\important> kubectl exec -it my-release-my-spring-app-c8bb7776-pcqz2 -- curl -v http://localhost:8080/actuator/health
+  19 error: Internal error occurred: unable to upgrade connection: container not found ("my-spring-app")
+  20 kubectl get all
+  21 kubectl delete deployment.apps/my-release-my-spring-app
+  22 kubectl delete service/my-release-my-spring-app
+  23 kubectl get all
+  24 kubectl get all
+  25 kubectl get all
+  26 kubectl logs pod/my-release-my-spring-app-674d9bf54-crrmp
+  27 kubectl describe pod/my-release-my-spring-app-674d9bf54-crrmp
+  28 kubectl get all
+  29 kubectl describe service/my-release-my-spring-app
+  30 kubectl get pod -o wide
+  31 curl -v http://a521104c907ef45e385d301b5ee3aa30-1153076408.us-east-2.elb.amazonaws.com
+  32 kubectl exec -it my-release-my-spring-app-674d9bf54-crrmp -- curl -v http://localhost:80/actuator/health
+  33 kubectl exec -it my-release-my-spring-app-674d9bf54-crrmp -- netstat -tuln
+  34 kubectl run -i --tty --rm debug --image=busybox --restart=Never -- sh
+  35 wget -O- http://my-release-my-spring-app
+  36 curl -v http://a521104c907ef45e385d301b5ee3aa30-1153076408.us-east-2.elb.amazonaws.com
+  37 kubectl logs my-release-my-spring-app-674d9bf54-crrmp
+  38 kubectl get endpoints my-release-my-spring-app
+  39 kubectl port-forward my-release-my-spring-app-674d9bf54-crrmp 8080:80
+  40 netstat -aon | findstr :8080
+  41 kubectl port-forward my-release-my-spring-app-674d9bf54-crrmp 8081:80
+  42 kubectl get all
+  43 kubectl delete deployment.apps/my-release-my-spring-app service/my-release-my-spring-app
+  44 kubectl get all
+  45 kubectl get all
+  46 kubectl get nodes -o wide
+  47 kubectl get pod -o wide
+  48 kubectl get all
+  49 kubectl describe pod/my-release-my-spring-app-7d4cddc86-5fdkt
+  50 kubectl service/my-release-my-spring-app
+  51 kubectl describe service/my-release-my-spring-app
+  52 kubectl port-forward svc/my-release-my-spring-app 8080:80
+  53 netstat -ano | Select-String "8080"
+  54 Stop-Process -Id <pid> -Force
+  55 Stop-Process -Id 8376 -Force
+  56 netstat -ano | Select-String "8080"
+  57 kubectl port-forward svc/my-release-my-spring-app 8080:80
+  58 kubectl create deployment standalone-deployment --image=khatanve/my-image:0babdd626647b47f10e42bb5d42ae906941e4c78
+  59 kubectl expose deployment standalone-deployment --port=80 --target-port=80 --type=LoadBalancer --name=standalone-service
+  60 kubectl get deployments
+  61 kubectl get svc
+  62 kubectl get all
+  63 kubectl describe service/standalone-service
+  64 kubectl gell
+  65 kubectl get all
+  66 kubectl delete service/standalone-service service/my-release-my-spring-app deployment.apps/standalone-deployment deployment.apps/my-release-my-spring-app
+  67 kubectl get all
+  68 kubectl get pod -o wide
+  69 curl http://10.0.1.194:30389
+  70 kubectl run -i --tty --rm debug --image=busybox -- sh
+  71 curl http://my-release-my-spring-app:80
+  72 kubectl get all
+  73 kubectl get all
+  74 kubectl get all
+  75 kubectl delete pod/my-release-my-spring-app-855679df98-hshhh pod/my-release-my-spring-app-5969f9d489-l4892
+  76 kubectl get all
+  77 kubectl get all
+  78 kubectl describe deployment.apps/my-release-my-spring-app
+  79 kubectl get all
+  80 kubectl get all
+  81 kubectl get pod -o wide
+  82 curl http://10.0.0.63:30389/
+  83 kubectl describe service my-release-my-spring-app
+  84 kubectl get all
+  85 kubectl delete deployment.apps/my-release-my-spring-app service/my-release-my-spring-app
+  86 kubectl get all
+  87 #kubectl delete pod/my-release-my-spring-app-855679df98-hshhh pod/my-release-my-spring-app-5969f9d489-l4892
+  88 kubectl get all
+  89 kubectl get all
+  90 kubectl get all
+  91 kubectl get all
+  92 kubectl describe pod/my-release-my-spring-app-5697b89d7-bbrk5
+  93 kubectl get all
+  94 kubectl delete deployment.apps/my-release-my-spring-app pod/my-release-my-spring-app-5697b89d7-bbrk5
+  95 kubectl get all
+  96 kubectl delete service/my-release-my-spring-app
+  97 kubectl get all
+  98 kubectl get all
+  99 kubectl describe pod/my-release-my-spring-app-55b4b5548c-ts6lc
+ 100 kubectl get all
+ 101 kubectl get pod -o wide
+ 102 kubectl get nodes -o wide
+ 103 kubectl get all
+ 104 kubectl delete deployment.apps/my-release-my-spring-app service/my-release-my-spring-app
+ 105 kubectl get all
+ 106 mvn clean
+ 107 mvn clean install
+ 108 mvn clean install
+ 109 kubectl get all
+ 110 kubectl get all
+ 111 kubectl describe pod/my-release-my-spring-app-79f9ccb6d6-5t9td
+ 112 kubectl get all
+ 113 alias k=kubectl
+ 114 kubectl delete deployment.apps/my-release-my-spring-app service/my-release-my-spring-app
+ 115 Set-Alias k kubectl
+ 116 k get node
+ 117 k get all
+ 118 aws configure
+ 119 k get all
+ 120 k describe pod/my-release-my-spring-app-77d4969658-pqbkr
+ 121 k get logs pod/my-release-my-spring-app-77d4969658-pqbkr
+ 122 k get logs my-release-my-spring-app-77d4969658-pqbkr
+ 123 k get log my-release-my-spring-app-77d4969658-pqbkr
+ 124 k log my-release-my-spring-app-77d4969658-pqbkr
+ 125 k logs my-release-my-spring-app-77d4969658-pqbkr
+ 126 kubectl get pods -o wide
+ 127 kubectl get services
+ 128 kubectl get endpoints
+ 129 kubectl describe service my-release-my-spring-app
+ 130 kubectl get networkpolicies
+ 131 k get all
+ 132 k delete service/my-release-my-spring-app deployment.apps/my-release-my-spring-app
+ 133 k get all
+ 134 k get all
+ 135 k describe pod/my-release-my-spring-app-6ff89cc847-zd84q
+ 136 k get all
+ 137 k delete deployment.apps/my-release-my-spring-app
+ 138 kubectl get ingress
+ 139 k get all
+ 140 k delete deployment.apps/my-release-my-spring-app service/my-release-my-spring-app
+ 141 k get all
+ 142 kubectl get ingress
+ 143 curl -H "Host: my-app.example.com" http://<external-ip-or-dns>
+ 144 kubectl describe ingress my-release-my-spring-app
+ 145 kubectl get svc -n kube-system
+ 146 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+ 147 kubectl get svc -n ingress-nginx
+ 148 kubectl get svc -n ingress-nginx
+ 149 Invoke-WebRequest -Uri http://ab6c97a7aaace4a30bb2f8c0e1b04994-1888776881.us-east-2.elb.amazonaws.com -Headers @{ "Host" = "my-app.example.com" }
+ 150 Invoke-WebRequest -Uri http://my-app.example.com -Headers @{ "Host" = "my-app.example.com" }
+ 151 ipconfig /flushdns
+ 152 Test-Connection -ComputerName ab6c97a7aaace4a30bb2f8c0e1b04994-1888776881.us-east-2.elb.amazonaws.com
+ 153 k get all
+ 154 k logs my-release-my-spring-app-5fc47cf7b9-8bqwp
+ 155 kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
+ 156 Invoke-WebRequest -Uri http://my-app.example.com -Headers @{ "Host" = "my-app.example.com" }
+ 157 kubectl get svc -n ingress-nginx
+ 158 k get all
+ 159 docker run -p 8080:8080 demo-app khatanve/my-image:4464d39e072b43b0c4e5ec700d2b956b386bfc7c
+ 160 docker run --help
+ 161 docker ps -a
+ 162 #docker run -p 8080:8080 demo-app khatanve/my-image:4464d39e072b43b0c4e5ec700d2b956b386bfc7c
+ 163 docker images
+ 164 docker pull docker run -p 8080:8080 demo-app
+ 165 docker pull  khatanve/my-image:4464d39e072b43b0c4e5ec700d2b956b386bfc7c
+ 166 docker login
+ 167 docker pull  khatanve/my-image:4464d39e072b43b0c4e5ec700d2b956b386bfc7c
+ 168 docker images
+ 169 k get all
+ 170 aws configure
+ 171 k get all
+ 172 aws eks --region us-east-2 update-kubeconfig --name example-eks-cluster
+ 173 kubectl get nodes
+ 174 k get all
+ 175 kubectl port-forward service/my-release-my-spring-app 80:80
+ 176 kubectl port-forward service/my-release-my-spring-app 8080:80
+ 177 kubectl port-forward service/my-release-my-spring-app 8080:80
+ 178 kubectl port-forward service/my-release-my-spring-app 8080:80
+ 179 k get all
+ 180 k logs pod/my-release-my-spring-app-5fc47cf7b9-4mkxj
+ 181 kubectl describe pod my-release-my-spring-app-5fc47cf7b9-4mkxj
+ 182 kubectl get svc
+ 183 kubectl port-forward service/my-release-my-spring-app 8080:80
+ 184 cd ..
+ 185 cd..
+ 186 cd .\test\
+ 187 ls
+ 188 k apply .\ns.yml
+ 189 k apply -f .\ns.yml
+ 190 k apply -f .\deploy.yml
+ 191 k apply -f .\svc.yml
+ 192 k get svc
+ 193 k get ns
+ 194 k get svc -n hello-world
+ 195 k port-forward svc/apiVersion: networking.k8s.io/v1
+ 196 kind: Ingress
+ 197 metadata:
+ 198   name: hello-world-ingress
+ 199   namespace: hello-world
+ 200   annotations:
+ 201     nginx.ingress.kubernetes.io/rewrite-target: /
+ 202 spec:
+ 203   rules:
+ 204   - host: hello-world.yourdomain.com
+ 205     http:
+ 206       paths:
+ 207       - path: /
+ 208         pathType: Prefix
+ 209         backend:
+ 210           service:
+ 211             name: hello-world-service
+ 212             port:
+ 213               number: 80
+ 214 clear
+ 215 k get svc -n hello-world
+ 216 k port-forward svc/hello-world-service 8080:80
+ 217 k port-forward svc/hello-world-service 8080:80 -n hello-world
+ 218 kubectl create secret docker-registry my-docker-registry-secret \
+ 219   --docker-server=https://index.docker.io/v1/ \
+ 220   --docker-username=khatanve \
+ 221   --docker-password=tanveerkhan@6872989 \
+ 222   --docker-email=tanveerkhan687@gmail.com
+ 223 kubectl create secret docker-registry my-docker-registry-secret --docker-server=https://index.docker.io/v1/ --docker-username=khatanve --docker-password=tanveerkhan@6872989  --dock...
+ 224 kubectl get secrets
+ 225 ls
+ 226 cd .\springboot\
+ 227 ls
+ 228 k apply -f .\deploy.yml
+ 229 k apply -f .\svc.yml
+ 230 k get all
+ 231 k port-forward service/my-spring-app-service 8080:80
+ 232 kubectl get pods
+ 233 k logs my-spring-app-6cf996dd87-2rc9j
+ 234 kubectl exec -it my-spring-app-6cf996dd87-2rc9j bash
+ 235 k apply -f .\deploy.yml
+ 236 kubectl get pods
+ 237 kubectl exec -it my-spring-app-6cf996dd87-2rc9j bash
+ 238 k get pods
+ 239 kubectl exec -it my-spring-app-6cf996dd87-77rl8 bash
+ 240 k port-forward service/my-spring-app-service 8080:80
+ 241 k port-forward service/my-spring-app-service 8080:80
+ 242 k get svc
+ 243 k get all
+ 244 k describe deployment.apps/my-spring-app
+ 245 cd C:\Users\khantan\Desktop\Testing\important
+ 246 ls
+ 247 ls
+ 248 mvn clean install
+ 249 ls
+ 250 docker build -t khatanve/my-image:v1
+ 251 docker build -t khatanve/my-image:v1 .
+ 252 docker images
+ 253 docker push khatanve/my-image:v1
+ 254 cd C:\Users\khantan\Desktop\test
+ 255 cd .\springboot\
+ 256 ls
+ 257 k apply -f .\deploy.yml
+ 258 k get all
+ 259 k get all
+ 260 k port-forward service/my-spring-app-service 8080:80
+ 261 k port-forward service/my-spring-app-service 8080:80
+ 262 k logs pod/my-spring-app-64c456d85c-cqbkl
+ 263 k exec -it my-spring-app-64c456d85c-cqbkl bash
+ 264 cd C:\Users\khantan\Desktop\Testing\important
+ 265 ls
+ 266 mvn clean install
+ 267 mvn clean install
+ 268 mvn clean install
+ 269 ls
+ 270 cd .\target\
+ 271 ls
+ 272 cd ..
+ 273 docker build -t khatanve/my-image:v2 .
+ 274 docker push khatanve/my-image:v2
+ 275 cd C:\Users\khantan\Desktop\test\springboot
+ 276 k apply -f .\deploy.yml
+ 277 k get all
+ 278 k get all
+ 279 k describe pod/my-spring-app-66f4d9665d-njkdw
+ 280 k logs pod/my-spring-app-66f4d9665d-njkdw
+ 281 cd C:\Users\khantan\Desktop\Testing\important
+ 282 mvn clean
+ 283 mvn clean install
+ 284 docker build -t khatanve/my-image:v3 .
+ 285 docker push khatanve/my-image:v3
+ 286 cd C:\Users\khantan\Desktop\test\springboot
+ 287 k apply -f .\deploy.yml
+ 288 k get all
+ 289 k port-forward service/my-spring-app-service 8080:80
+ 290 cd C:\Users\khantan\Desktop\Testing\important
+ 291 mvn clean install
+ 292 docker build -t khatanve/my-image:v4 .
+ 293 docker push khatanve/my-image:v4
+ 294 C:\Users\khantan\Desktop\test\springboot
+ 295 cd C:\Users\khantan\Desktop\test\springboot
+ 296 k apply -f .\deploy.yml
+ 297 k apply -f .\deploy.yml
+ 298 k port-forward service/my-spring-app-service 8080:80
+ 299 k get all
+ 300 k delete service/my-release-my-spring-app deployment.apps/my-release-my-spring-app deployment.apps/my-spring-app
+ 301 k get all
+ 302 k delete service/my-spring-app-service
+ 303 k get all
+ 304 k get all
+ 305 k get all
+ 306 k describe pod/my-release-my-spring-app-77bc8b5c8f-wkxnz
+ 307 k logs pod/my-release-my-spring-app-77bc8b5c8f-wkxnz
+ 308 k get all
+ 309 k delete deployment.apps/my-release-my-spring-app service/my-release-my-spring-app
+ 310 k get all
+ 311 k get all
+ 312 k describe pod/my-release-my-spring-app-dc4dd48c4-rnbrm
+ 313 k logs pod/my-release-my-spring-app-dc4dd48c4-rnbrm
+ 314 k get all
+ 315 k delete deployment.apps/my-release-my-spring-app service/my-release-my-spring-app
+ 316 k get all
+ 317 helm list
+ 318 k get all
+ 319 k logs pod/my-release-my-spring-app-54d66485d9-k9n6z
+ 320 helm list
+ 321 helm uninstall my-release
+ 322 k get all
+ 323 k get all
+ 324 k port-forward service/my-release-my-spring-app-service 8080:80
+ 325  k port-forward service/my-release-my-spring-app
+ 326  k port-forward service/my-release-my-spring-app 8008:80
+ 327  k port-forward service/my-release-my-spring-app 8080:80
+ 328 helm list
+ 329 helm uninstall my-release
+ 330 helm install my-release
+ 331 helm list
+ 332 k get all
+ 333 curl -o alb-ingress-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
+ 334 aws iam create-policy --policy-name ALBIngressControllerIAMPolicy --policy-document file://alb-ingress-policy.json
+ 335 kubectl create serviceaccount alb-ingress-controller -n kube-system
+ 336 kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::<your-account-id>:role/<Your-IAM-Role-Name>
+ 337 k get sa
+ 338 helm repo add eks https://aws.github.io/eks-charts
+ 339 helm repo update
+ 340  kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::631327475467:role/ALBIngressIAMRole
+ 341 k delete sa alb-ingress-controller -n kube-system
+ 342 kubectl create serviceaccount alb-ingress-controller -n kube-system
+ 343 kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::631327475467:role/ALBIngressIAMRole
+ 344 helm install aws-load-balancer-controller eks/aws-load-balancer-controller --set clusterName=example-eks-cluster --set serviceAccount.create=false --set serviceAccount.name=alb-ing...
+ 345 k get pod
+ 346 k get pods
+ 347 k get pods -n kube-system
+ 348 k get svc
+ 349 helm upgrade --install my-release . --set image.tag=a7b5d61 --dry-run
+ 350 ls
+ 351 cd C:\Users\khantan\Desktop\Testing\important
+ 352 ls
+ 353 cd .\my-spring-app\
+ 354 ls
+ 355 helm upgrade --install my-release . --set image.tag=a7b5d61 --dry-run
+ 356 k get all
+ 357 k get all
+ 358 k get ingress
+ 359 helm upgrade --install my-release . --set image.tag=a7b5d61 --dry-run
+ 360 helm upgrade --install my-release . --set image.tag=a7b5d61
+ 361 k get all
+ 362 k describe pod/my-release-my-spring-app-5564b8bb5d-z8cdf
+ 363 helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 364 k get all
+ 365 k get ingres
+ 366 k get ingress
+ 367 k describe example-ingress
+ 368 k describe example-ingress -n default
+ 369 helm list
+ 370 helm uninstall my-release
+ 371 helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 372 helm uninstall my-release
+ 373 helm list
+ 374 helm uninstall my-release
+ 375 helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 376 helm uninstall my-release
+ 377 helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 378 k get ingress
+ 379 k describe example-ingress
+ 380 k describe ingress example-ingress
+ 381 helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 382 k describe ingress example-ingress
+ 383 k get ingress
+ 384 ping k8s-default-examplei-adb82cc43c-628764542.us-east-2.elb.amazonaws.com
+ 385 cd C:\Windows\System32\drivers\etc\
+ 386 ls
+ 387 chmod 777 hosts
+ 388 #helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140
+ 389 cd C:\Users\khantan\Desktop\Testing\important
+ 390 #helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140
+ 391 ##helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 392 helm list
+ 393 helm uninstall my-release
+ 394 helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 395 ls
+ 396 cd .\my-spring-app\
+ 397 helm upgrade --install my-release . --set image.tag=a7b5d61ef039c7b146760d623a2351b31140ee10
+ 398 k get all
+ 399 k get ingress
+ 400 ping k8s-default-myspring-5dff5f997d-251243884.us-east-2.elb.amazonaws.com
+ 401 k get all
+ 402 k get ingress
+ 403 ping k8s-default-myspring-5dff5f997d-251243884.us-east-2.elb.amazonaws.com
+ 404 ping k8s-default-myspring-5dff5f997d-251243884.us-east-2.elb.amazonaws.com
+ 405 clear
+ 406 history
+ 407 k get node
+ 408 k get secrete
+ 409 k get secret
+ 410 k get secret -all
+ 411 k get secret a
+ 412 k get secret -all
+ 413 k get all
+ 414 k get sa
+ 415 k get sa -n kube-system
+ 416 k  get all
+ 417 k get all
+ 418 k get ingress
+ 419 helm list
+ 420 helm uninstall my-release
+ 421 k get all
+ 422 k delete service/my-release-my-spring-app
+ 423 k get all
+ 424 k get all
+ 425 k get ingress
+ 426 ping k8s-default-myspring-5dff5f997d-251243884.us-east-2.elb.amazonaws.com
+ 427 k get ingress -n kube-system
+ 428 k get all
+ 429 k get all -n kube-system
+ 430 k get pods
+ 431 k get pods -o wide
+ 432 k logs my-release-my-spring-app-556c68457c-lbgn7
+ 433 k get all
+ 434 k get ingress my-ingress
+ 435 k get ingress
+ 436 terraform destroy -target=aws_iam_role.alb_ingress_role
+ 437 terraform destroy -target=aws_iam_policy.alb_ingress_policy
+ 438 cd ..
+ 439 ls
+ 440 cd .\ekscluster\
+ 441 terraform destroy -target=aws_iam_role.alb_ingress_role
+ 442 terraform destroy -target=aws_iam_policy.alb_ingress_policy
+ 443 k get all
+ 444 k logs pod/my-release-my-spring-app-556c68457c-n2szf
+ 445 k get all
+ 446 kubectl run my-spring-app-pod --image=khatanve/my-image:latest --restart=Never
+ 447 k get all
+ 448 kubectl expose pod my-spring-app-pod --type=LoadBalancer --name=my-spring-app-service --port=80 --target-port=8080
+ 449 k get all
+ 450 k get all
+ 451 k get all
+ 452 k get all
+ 453 k get all
+ 454 k describe my-spring-app-service
+ 455 k describe svc my-spring-app-service
+ 456 k get pod -o wide
+ 457 kubectl delete svc my-spring-app-service
+ 458 kubectl expose pod my-spring-app-pod --type=NodePort --name=my-spring-app-service --port=80 --target-port=8080
+ 459 k get all
+ 460 k describe service/my-spring-app-service
+ 461 k get all -o wide
+ 462 ping ip-10-0-0-235.us-east-2.compute.internal
+ 463 curl ip-10-0-0-235.us-east-2.compute.internal
+ 464 k get node -o wide
+ 465 k port-forward service/my-spring-app-service 8080:80
+ 466 k get all
+ 467 k delete service/my-spring-app-service service/my-release-my-spring-app pod/my-spring-app-pod
+ 468 k get all
+ 469 cd ..
+ 470 ls
+ 471 k apply -f 1.yml
+ 472 k getall
+ 473 k get all
+ 474 k get node -o wide
+ 475 k get pod -o wide
+ 476 curl http://18.224.38.189:30007
+ 477 k port-forward service/my-app-service 8080:80
+ 478 k port-forward service/my-app-service 8080:8080
+ 479 k apply -f 1.yml
+ 480 k get all
+ 481 k port-forward service/my-app-service 8080:80
+ 482 k port-forward service/my-app-service 80:8080
+ 483 k port-forward service/my-app-service 8080:80
+ 484 k get node -o wide
+ 485 k get pod -o wide
+ 486 helm list
+ 487 helm uninstall my-release
+ 488 k get all
+ 489 ls
+ 490 k delete -f 1.yml
+ 491 k get all
+ 492 k get all
+ 493 helm list
+ 494 helm uninstall my-release
+ 495 cat ~/.kube/config
+
+
+PS C:\Users\khantan\Desktop\Testing\important>

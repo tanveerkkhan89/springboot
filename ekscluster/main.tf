@@ -315,3 +315,8 @@ resource "aws_iam_role_policy_attachment" "alb_ingress_role_policy" {
 output "eks_cluster_name" {
   value = aws_eks_cluster.eks_cluster.name
 }
+
+output "vpc_id" {
+  description = "The ID of the VPC"
+  value       = aws_vpc.main.id
+}

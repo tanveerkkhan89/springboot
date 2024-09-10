@@ -198,7 +198,6 @@ resource "aws_eks_node_group" "eks_nodes" {
   node_group_name = "example-node-group"
   node_role_arn   = aws_iam_role.eks_node_role.arn
   subnet_ids      = aws_subnet.public[*].id
-  node_security_groups = [aws_security_group.eks_nodes_sg.id]
 
   scaling_config {
     desired_size = 2
@@ -210,6 +209,7 @@ resource "aws_eks_node_group" "eks_nodes" {
     Name = "eks-node-group"
   }
 }
+
 
 # IAM Policy and Role for AWS Load Balancer Controller
 resource "aws_iam_role" "alb_ingress_role" {

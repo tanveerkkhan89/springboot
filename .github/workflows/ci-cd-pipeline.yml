@@ -153,10 +153,18 @@ jobs:
 
       - name: Deploy AWS Load Balancer Controller
         run: |
+            kubectl create serviceaccount alb-ingress-controller -n kube-system
+            kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::631327475467:role/ALBIngressIAMRole
+
+            
+            helm repo add eks https://aws.github.io/eks-charts
+            helm repo update
+            
+
           helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
             --set clusterName=${{ needs.extract.outputs.cluster_name }} \
             --set serviceAccount.create=false \
-            --set serviceAccount.name=my-custom-sa \
+            --set serviceAccount.name=alb-ingress-controller \
             --set region=us-east-2 \
             --set vpcId=${{ needs.extract.outputs.vpc_id }} \
             --namespace kube-system

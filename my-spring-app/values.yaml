@@ -2,22 +2,21 @@ replicaCount: 2
 
 image:
   repository: khatanve/my-image
-  tag: ""  # Specify your image tag here if needed
+  tag: "latest"  # Specify your image tag here
   pullPolicy: IfNotPresent
 
 service:
-  type: LoadBalancer
+  type: NodePort
   port: 80
   targetPort: 8080
+  nodePort: 30000
 
 resources: {}
 
 ingress:
-  enabled: true  # Set to true to enable Ingress
-  # Configuration for Ingress
-  host: mytestspring.com  # Replace with your domain or public IP address
+  enabled: true
+  host: mytestspring.com
   path: /
-  # Optionally, specify additional Ingress annotations
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # Set to "true" if using HTTPS
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"

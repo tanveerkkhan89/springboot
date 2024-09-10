@@ -137,6 +137,11 @@ jobs:
           sudo mv linux-amd64/helm /usr/local/bin/helm
           helm version --client
 
+      - name: Add Helm Repository
+        run: |
+          helm repo add eks https://aws.github.io/eks-charts
+          helm repo update
+
       - name: Configure kubectl to use EKS
         run: |
           aws eks update-kubeconfig --name ${{ needs.extract.outputs.cluster_name }} --region us-east-2

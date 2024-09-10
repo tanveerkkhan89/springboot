@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-spring-app
+  name: my-spring-app-ingress
   namespace: default
   annotations:
     kubernetes.io/ingress.class: alb

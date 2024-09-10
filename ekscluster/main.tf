@@ -49,26 +49,13 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# Route Table
-resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.main.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
-  }
-
-  tags = {
-    Name = "main-public-rt"
+provider "helm" {
+  kubernetes {
+    config_path = "~/.kube/config" # Ensure this path points to your kubeconfig file
   }
 }
 
-# Route Table Association
-resource "aws_route_table_association" "public" {
-  count          = 2
-  subnet_id      = aws_subnet.public[count.index].id
-  route_table_id = aws_route_table.public.id
-}
+# VPC, Subnets, Internet Gateway, Route Table, Route Table Association (Same as Your Configuration)
 
 # Security Group for EKS Nodes
 resource "aws_security_group" "eks_nodes_sg" {
@@ -227,6 +214,13 @@ resource "aws_iam_role" "alb_ingress_role" {
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
+
+# IAM Policy and Role for AWS Load Balancer Controller
+resource "aws_iam_role" "alb_ingress_role" {
+  name = "ALBIngressIAMRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow",
@@ -252,12 +246,16 @@ resource "aws_iam_role" "alb_ingress_role" {
 resource "aws_iam_policy" "alb_ingress_policy" {
   name        = "alb-ingress-policy"
   description = "Policy for AWS Load Balancer Controller"
+}
 
+resource "aws_iam_policy" "alb_ingress_policy" {
+  name        = "ALBIngressPolicy"
+  description = "Policy for ALB Ingress Controller"
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
-        Action = [
+         Action = [
           "elasticloadbalancing:CreateLoadBalancer",
           "elasticloadbalancing:DeleteLoadBalancer",
           "elasticloadbalancing:CreateTargetGroup",
@@ -332,4 +330,44 @@ resource "helm_release" "alb_ingress_controller" {
   depends_on = [
     aws_iam_role_policy_attachment.alb_ingress_policy_attachment
   ]
+
+resource "aws_iam_role_policy_attachment" "alb_ingress_role_policy" {
+  role       = aws_iam_role.alb_ingress_role.name
+  policy_arn = aws_iam_policy.alb_ingress_policy.arn
+}
+
+# Kubernetes Service Account for ALB Ingress Controller my-custom-sa
+resource "kubernetes_service_account" "alb_ingress_sa" {
+  metadata {
+    name      = "my-custom-sa"
+    namespace = "kube-system"
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.alb_ingress_role.arn
+    }
+  }
+}
+
+# Helm Release for AWS Load Balancer Controller
+resource "helm_release" "aws_load_balancer_controller" {
+  name       = "aws-load-balancer-controller"
+  repository = "https://aws.github.io/eks-charts"
+  chart      = "aws-load-balancer-controller"
+  version    = "2.4.1"  # Adjust to the latest version if needed
+
+  values = {
+    clusterName = aws_eks_cluster.eks_cluster.name
+    serviceAccount = {
+      create = false
+      name   = kubernetes_service_account.alb_ingress_sa.metadata[0].name
+    }
+    region = "us-east-2"
+    vpcId  = aws_vpc.main.id
+  }
+
+  depends_on = [kubernetes_service_account.alb_ingress_sa]
+}
+
+# Output the EKS Cluster Name
+output "eks_cluster_name" {
+  value = aws_eks_cluster.eks_cluster.name
 }

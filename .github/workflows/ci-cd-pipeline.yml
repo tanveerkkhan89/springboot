@@ -153,10 +153,9 @@ jobs:
 
       - name: Deploy AWS Load Balancer Controller
         run: |
-            #kubectl create serviceaccount alb-ingress-controller -n kube-system
-            #kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::631327475467:role/ALBIngressIAMRole
-
-            
+            kubectl create serviceaccount alb-ingress-controller -n kube-system
+            kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::631327475467:role/ALBIngressIAMRole
+     
             helm repo add eks https://aws.github.io/eks-charts
             helm repo update
             

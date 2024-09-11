@@ -159,7 +159,7 @@ jobs:
             helm repo add eks https://aws.github.io/eks-charts
             helm repo update
             
-
+            helm uninstall aws-load-balancer-controller -n kube-system
             helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
                 --set clusterName=${{ needs.extract.outputs.cluster_name }} \
                 --set serviceAccount.create=false \

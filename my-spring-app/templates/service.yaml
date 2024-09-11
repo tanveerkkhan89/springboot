@@ -10,6 +10,5 @@ spec:
     - protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
-      nodePort: {{ .Values.service.nodePort | default nil }}
   selector:
     app: {{ include "my-spring-app.name" . }}

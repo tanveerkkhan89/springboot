@@ -172,13 +172,14 @@ jobs:
           
           # Install or upgrade the Helm chart
           helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
-            --set image.tag=v2.8.2
-            --set clusterName=example-eks-cluster \
-            --set serviceAccount.create=false \
-            --set serviceAccount.name=alb-ingress-controller \
-            --set region=us-east-2 \
-            --set vpcId=vpc-02c20a702d1dc083f \
-            --namespace kube-system
+              --set image.tag=v2.8.2 \
+              --set clusterName=example-eks-cluster \
+              --set serviceAccount.create=false \
+              --set serviceAccount.name=alb-ingress-controller \
+              --set region=us-east-2 \
+              --set vpcId=vpc-02c20a702d1dc083f \
+              --namespace kube-system
+
       
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

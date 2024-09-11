@@ -153,24 +153,34 @@ jobs:
 
       - name: Deploy AWS Load Balancer Controller
         run: |
-            kubectl create serviceaccount alb-ingress-controller -n kube-system
-            kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::631327475467:role/ALBIngressIAMRole
-     
-            helm repo add eks https://aws.github.io/eks-charts
-            helm repo update
-            
-            helm uninstall aws-load-balancer-controller -n kube-system
-            helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
-                --set clusterName=${{ needs.extract.outputs.cluster_name }} \
-                --set serviceAccount.create=false \
-                --set serviceAccount.name=alb-ingress-controller \
-                --set region=us-east-2 \
-                --set vpcId=${{ needs.extract.outputs.vpc_id }} \
-                --namespace kube-system
+          # Create service account and annotate it with the IAM role ARN
+          kubectl create serviceaccount alb-ingress-controller -n kube-system || true
+          kubectl annotate serviceaccount alb-ingress-controller -n kube-system eks.amazonaws.com/role-arn=arn:aws:iam::631327475467:role/ALBIngressIAMRole || true
+          
+          # Add and update Helm repository
+          helm repo add eks https://aws.github.io/eks-charts
+          helm repo update
+          
+          # Check if the Helm release exists and uninstall it if present
+          if helm list -n kube-system | grep -q aws-load-balancer-controller; then
+            echo "Release aws-load-balancer-controller exists. Deleting..."
+            helm uninstall aws-load-balancer-controller -n kube-system || true
+          fi
+      
+          # Install or upgrade the Helm chart
+          helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
+            --set clusterName=${{ needs.extract.outputs.cluster_name }} \
+            --set serviceAccount.create=false \
+            --set serviceAccount.name=alb-ingress-controller \
+            --set region=us-east-2 \
+            --set vpcId=${{ needs.extract.outputs.vpc_id }} \
+            --namespace kube-system
+      
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-2
+
 
       - name: Deploy with Helm
         run: |

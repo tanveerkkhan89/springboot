@@ -161,7 +161,7 @@ jobs:
             
 
             helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
-                --version 2.5.1 \
+                --version 2.8.2 \
                 --set clusterName=${{ needs.extract.outputs.cluster_name }} \
                 --set serviceAccount.create=false \
                 --set serviceAccount.name=alb-ingress-controller \

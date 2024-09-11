@@ -166,15 +166,18 @@ jobs:
            # echo "Release aws-load-balancer-controller exists. Deleting..."
             #helm uninstall aws-load-balancer-controller -n kube-system || true
           #fi
-      
+          
+          echo "Cluster Name : ${{ needs.extract.outputs.cluster_name }}"
+          echo "VPC ID :  ${{ needs.extract.outputs.vpc_id }}"
+          
           # Install or upgrade the Helm chart
           helm upgrade --install aws-load-balancer-controller eks/aws-load-balancer-controller \
             --set image.tag=v2.8.2
-            --set clusterName=${{ needs.extract.outputs.cluster_name }} \
+            --set clusterName=example-eks-cluster \
             --set serviceAccount.create=false \
             --set serviceAccount.name=alb-ingress-controller \
             --set region=us-east-2 \
-            --set vpcId=${{ needs.extract.outputs.vpc_id }} \
+            --set vpcId=vpc-02c20a702d1dc083f \
             --namespace kube-system
       
         env:

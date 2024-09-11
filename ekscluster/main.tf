@@ -230,6 +230,11 @@ resource "aws_eks_node_group" "eks_nodes" {
   }
 }
 
+# Fetch the EKS cluster details
+data "aws_eks_cluster" "eks_cluster" {
+  name = "example-eks-cluster" # Replace with your EKS cluster name
+  depends_on = [aws_eks_cluster.eks_cluster]
+}
 
 # IAM Policy and Role for AWS Load Balancer Controller
 resource "aws_iam_role" "alb_ingress_role" {
@@ -241,22 +246,20 @@ resource "aws_iam_role" "alb_ingress_role" {
       {
         Effect = "Allow",
         Principal = {
-          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/oidc.eks.${data.aws_region.current.name}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}"
+          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${data.aws_eks_cluster.eks_cluster_oidc.identity[0].oidc_provider}"
         },
         Action = "sts:AssumeRoleWithWebIdentity",
         Condition = {
           StringEquals = {
-            "oidc.eks.${data.aws_region.current.name}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
+            "${data.aws_eks_cluster.eks_cluster_oidc.identity[0].oidc_provider}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
           }
         }
       }
     ]
   })
-
-  tags = {
-    Name = "alb-ingress-role"
-  }
 }
+
+
 
 
 resource "aws_iam_policy" "alb_ingress_policy" {

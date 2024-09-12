@@ -73,9 +73,7 @@ provider "helm" {
 
 # Security Group for EKS Nodes
 resource "aws_security_group" "eks_nodes_sg" {
-  name = var.eks_node_sgname
   vpc_id = aws_vpc.main.id
-
   ingress {
     from_port   = 0
     to_port     = 65535
@@ -97,7 +95,6 @@ resource "aws_security_group" "eks_nodes_sg" {
 
 # Security Group for Load Balancer
 resource "aws_security_group" "alb_sg" {
-  name = var.alb_sg
   vpc_id = aws_vpc.main.id
 
   ingress {

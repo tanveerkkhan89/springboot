@@ -259,9 +259,6 @@ resource "aws_iam_role" "alb_ingress_role" {
   })
 }
 
-
-
-
 resource "aws_iam_policy" "alb_ingress_policy" {
   name        = "ALBIngressPolicy"
   description = "Policy for ALB Ingress Controller"

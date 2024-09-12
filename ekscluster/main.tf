@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-2"
+  region = var.region
 }
 
 provider "kubernetes" {
@@ -11,7 +11,7 @@ data "aws_region" "current" {}
 
 # VPC
 resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = var.cidr_block
   enable_dns_support   = true
   enable_dns_hostnames = true
 
@@ -73,6 +73,7 @@ provider "helm" {
 
 # Security Group for EKS Nodes
 resource "aws_security_group" "eks_nodes_sg" {
+  name = var.eks_node_sgname
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -90,12 +91,13 @@ resource "aws_security_group" "eks_nodes_sg" {
   }
 
   tags = {
-    Name = "eks-nodes-sg"
+    Name = var.eks_node_sgname
   }
 }
 
 # Security Group for Load Balancer
 resource "aws_security_group" "alb_sg" {
+  name = var.alb_sg
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -120,13 +122,13 @@ resource "aws_security_group" "alb_sg" {
   }
 
   tags = {
-    Name = "alb-sg"
+    Name = var.alb_sg
   }
 }
 
 # IAM Role for EKS Cluster
 resource "aws_iam_role" "eks_cluster_role" {
-  name = "eks-cluster-role"
+  name = var.eks-cluster-role
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -142,7 +144,7 @@ resource "aws_iam_role" "eks_cluster_role" {
   })
 
   tags = {
-    Name = "eks-cluster-role"
+    Name = var.eks-cluster-role
   }
 }
 
@@ -153,7 +155,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
 
 # IAM Role for EKS Nodes
 resource "aws_iam_role" "eks_node_role" {
-  name = "eks-node-role-unique"
+  name = var.eks-node-role-unique
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -169,7 +171,7 @@ resource "aws_iam_role" "eks_node_role" {
   })
 
   tags = {
-    Name = "eks-node-role-unique"
+    Name = var.eks-node-role-unique
   }
 }
 
@@ -190,7 +192,7 @@ resource "aws_iam_role_policy_attachment" "eks_ec2_container_policy" {
 
 # EKS Cluster
 resource "aws_eks_cluster" "eks_cluster" {
-  name     = "example-eks-cluster"
+  name     = var.eks_cluster
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
@@ -206,7 +208,7 @@ resource "aws_eks_cluster" "eks_cluster" {
 # EKS Node Group
 resource "aws_eks_node_group" "eks_nodes" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
-  node_group_name = "example-node-group"
+  node_group_name = var.node_group_name
   node_role_arn   = aws_iam_role.eks_node_role.arn
   subnet_ids      = aws_subnet.public[*].id
 
@@ -223,13 +225,13 @@ resource "aws_eks_node_group" "eks_nodes" {
 
 # Fetch the EKS cluster details
 data "aws_eks_cluster" "eks_cluster" {
-  name = "example-eks-cluster" # Replace with your EKS cluster name
+  name = var.eks_cluster # Replace with your EKS cluster name
   depends_on = [aws_eks_cluster.eks_cluster]
 }
 
 # IAM Policy and Role for AWS Load Balancer Controller
 resource "aws_iam_role" "alb_ingress_role" {
-  name = "ALBIngressIAMRole"
+  name = var.ALBIngressIAMRole
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -250,11 +252,8 @@ resource "aws_iam_role" "alb_ingress_role" {
   })
 }
 
-
-
-
 resource "aws_iam_policy" "alb_ingress_policy" {
-  name        = "ALBIngressPolicy"
+  name        = var.ALBIngressPolicy
   description = "Policy for ALB Ingress Controller"
   policy = jsonencode({
     Version = "2012-10-17",

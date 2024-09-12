@@ -1,12 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket         = "rakbankdemo3"
-    key            = "terraform/state.tfstate"
-    region         = "us-east-2"
-    dynamodb_table = "terraform-lock-table3"
-  }
-}
-
 provider "aws" {
   region = "us-east-2"
 }
@@ -246,12 +237,12 @@ resource "aws_iam_role" "alb_ingress_role" {
       {
         Effect = "Allow",
         Principal = {
-          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${trim_prefix(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://")}"
+          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${trimprefix(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://")}"
         },
         Action = "sts:AssumeRoleWithWebIdentity",
         Condition = {
           StringEquals = {
-            "${trim_prefix(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://")}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
+            "${trimprefix(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://")}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
           }
         }
       }

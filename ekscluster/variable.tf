@@ -21,7 +21,7 @@ variable "node_group_name" {
 
 
 variable "eks_node_sgname" {
-    default = eks-nodes-sg
+    default = "eks-nodes-sg"
     type = string
     }
 

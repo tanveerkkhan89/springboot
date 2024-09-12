@@ -246,12 +246,12 @@ resource "aws_iam_role" "alb_ingress_role" {
       {
         Effect = "Allow",
         Principal = {
-          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${data.aws_eks_cluster.eks_cluster.identity[0].oidc_provider}"
+          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer}"
         },
         Action = "sts:AssumeRoleWithWebIdentity",
         Condition = {
           StringEquals = {
-            "${data.aws_eks_cluster.eks_cluster.identity[0].oidc_provider}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
+            "${data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer}:sub": "system:serviceaccount:kube-system:alb-ingress-controller"
           }
         }
       }
